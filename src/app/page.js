@@ -10,6 +10,7 @@ export default function PsychologicalTest() {
   const [showLoading, setShowLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [imageError, setImageError] = useState({});
+  const [loadingBackgroundLoaded, setLoadingBackgroundLoaded] = useState(false);
 
   const questions = [
     { 
@@ -19,7 +20,7 @@ export default function PsychologicalTest() {
         '幫大家整理裝備，氣瓶、蛙鞋都排好',
         '拿出手機狂拍，IG 限動已發 5 則',
         '坐著放空，默默記每個人的臉',
-        '偷偷問：「這趟潛水有沒有看到魟魚？」'
+        '偷偷問：「不知道會不會看到炸裂的！」'
       ]
     },
     { 
@@ -102,7 +103,7 @@ export default function PsychologicalTest() {
         setResult(maxAnswer);
         setShowLoading(false);
         setCurrentScreen('result');
-      }, 3000);
+      }, 2000);
     }
   };
 
@@ -125,7 +126,7 @@ export default function PsychologicalTest() {
   };
 
   const renderIntro = () => (
-    <div className="relative w-full h-full bg-gradient-to-br from-blue-400 to-purple-600">
+    <div className="relative w-full h-full">
       {!imageError['/img/bunny_intro_background.png'] && (
         <Image
           src="/img/bunny_intro_background.png"
@@ -149,11 +150,7 @@ export default function PsychologicalTest() {
               className="animate-bounce-slow hover:scale-105 transition-transform"
               onError={() => handleImageError('/img/bunny_intro_bunny.png')}
             />
-          ) : (
-            <div className="w-96 h-96 bg-white bg-opacity-20 rounded-lg flex items-center justify-center animate-bounce-slow">
-              <span className="text-6xl">🐰</span>
-            </div>
-          )}
+          ) : null}
         </div>
       </div>
       
@@ -172,18 +169,14 @@ export default function PsychologicalTest() {
               className="hover:scale-105 transition-transform"
               onError={() => handleImageError('/img/bunny_btn_start.png')}
             />
-          ) : (
-            <div className="text-2xl font-bold text-white px-8 py-4">
-              開始測驗
-            </div>
-          )}
+          ) : null}
         </button>
       </div>
     </div>
   );
 
   const renderQuestion = () => (
-    <div className="relative w-full h-full bg-gradient-to-br from-green-400 to-blue-500">
+    <div className="relative w-full h-full">
       {!imageError['/img/bunny_ques _background.png'] && (
         <Image
           src="/img/bunny_ques _background.png"
@@ -206,13 +199,7 @@ export default function PsychologicalTest() {
             style={{ transform: 'scale(1.3)' }}
             onError={() => handleImageError(questions[currentQuestion - 1].image)}
           />
-        ) : (
-          <div className="text-center">
-            <div className="bg-gray-200 rounded-lg p-8 text-gray-600">
-              問題圖片載入中...
-            </div>
-          </div>
-        )}
+        ) : null}
       </div>
 
       {/* Answer Options - 修改樣式，移到35%位置 */}
@@ -241,39 +228,44 @@ export default function PsychologicalTest() {
         </div>
       </div>
 
-      {/* Back Button - 縮小1.5倍，靠左邊位置 */}
-      <div className="absolute top-[85%] left-4 z-20">
-        <button
-          onClick={handleBack}
-          className="transition-transform duration-200 hover:scale-110"
-        >
-          {!imageError['/img/bunny_btn_back.png'] ? (
-            <Image
-              src="/img/bunny_btn_back.png"
-              alt="Back Button"
-              width={66}
-              height={26}
-              className="w-auto h-auto"
-              onError={() => handleImageError('/img/bunny_btn_back.png')}
-            />
-          ) : (
-            <div className="text-white text-xl px-3 py-2">←</div>
-          )}
-        </button>
-      </div>
+      {/* Back Button - 縮小1.5倍，靠左邊位置，第一題不顯示 */}
+      {currentQuestion > 1 && (
+        <div className="absolute top-[85%] left-4 z-20">
+          <button
+            onClick={handleBack}
+            className="transition-transform duration-200 hover:scale-110"
+          >
+            {!imageError['/img/bunny_btn_back.png'] ? (
+              <Image
+                src="/img/bunny_btn_back.png"
+                alt="Back Button"
+                width={66}
+                height={26}
+                className="w-auto h-auto"
+                onError={() => handleImageError('/img/bunny_btn_back.png')}
+              />
+            ) : null}
+          </button>
+        </div>
+      )}
     </div>
   );
 
   const renderLoading = () => (
-    <div className="relative w-full h-full bg-gradient-to-br from-orange-400 to-red-500">
+    <div className="relative w-full h-full">
       {!imageError['/img/bunny_loading_background.png'] && (
         <Image
           src="/img/bunny_loading_background.png"
           alt="Loading Background"
           fill
           className="object-cover"
+          onLoad={() => setLoadingBackgroundLoaded(true)}
           onError={() => handleImageError('/img/bunny_loading_background.png')}
         />
+      )}
+      {imageError['/img/bunny_loading_background.png'] && (
+        <div className="w-full h-full bg-white flex items-center justify-center">
+        </div>
       )}
     </div>
   );
@@ -290,7 +282,7 @@ export default function PsychologicalTest() {
     console.log('Current imageError state:', imageError);
 
     return (
-      <div className="relative w-full h-full bg-gradient-to-br from-purple-400 to-pink-500">
+      <div className="relative w-full h-full">
         {/* 背景圖片 - 所有結果都顯示 */}
         <img
           src={backgroundImagePath}
@@ -338,9 +330,7 @@ export default function PsychologicalTest() {
                 className="w-auto h-auto"
                 onError={() => handleImageError('/img/bunny_btn_reset.png')}
               />
-            ) : (
-              <div className="text-white text-xl px-3 py-2">重新開始</div>
-            )}
+            ) : null}
           </button>
         </div>
       </div>
