@@ -340,14 +340,16 @@ export default function PsychologicalTest() {
   return (
     <div className="w-full h-screen flex items-center justify-center relative">
       {/* 主頁面背景圖片 */}
-      <Image
-        src="/img/bunny_background.png"
-        alt="Main Background"
-        fill
-        className="object-cover"
-        priority
-        onError={() => console.log('❌ Main background image failed to load')}
-      />
+      {!imageError['/img/bunny_background.png'] && (
+        <Image
+          src="/img/bunny_background.png"
+          alt="Main Background"
+          fill
+          className="object-cover"
+          priority
+          onError={() => handleImageError('/img/bunny_background.png')}
+        />
+      )}
       <div className="mobile-frame relative z-10">
         {showLoading ? (
           renderLoading()
