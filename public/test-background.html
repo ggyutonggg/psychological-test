@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>背景圖片測試</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .test-container {
+            width: 300px;
+            height: 200px;
+            margin: 20px;
+            border: 2px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+        .background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .fallback {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>背景圖片測試</h1>
+    
+    <h2>結果B背景</h2>
+    <div class="test-container">
+        <img src="/img/bunny_result_B_backgroud.png" alt="Result B Background" class="background-image" 
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="fallback" style="display: none;">載入失敗 - 漸變背景</div>
+    </div>
+
+    <h2>結果C背景</h2>
+    <div class="test-container">
+        <img src="/img/bunny_result_C_backgroud.png" alt="Result C Background" class="background-image"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="fallback" style="display: none;">載入失敗 - 漸變背景</div>
+    </div>
+
+    <h2>結果D背景</h2>
+    <div class="test-container">
+        <img src="/img/bunny_result_D_backgroud.png" alt="Result D Background" class="background-image"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="fallback" style="display: none;">載入失敗 - 漸變背景</div>
+    </div>
+
+    <h2>載入背景</h2>
+    <div class="test-container">
+        <img src="/img/bunny_loading_background.png" alt="Loading Background" class="background-image"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="fallback" style="display: none;">載入失敗 - 漸變背景</div>
+    </div>
+</body>
+</html> 
