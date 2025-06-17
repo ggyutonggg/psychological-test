@@ -267,6 +267,21 @@ export default function PsychologicalTest() {
         <div className="w-full h-full bg-white flex items-center justify-center">
         </div>
       )}
+      
+      {/* Bunny Intro Image - 65%位置，縮小0.9倍，微微上下浮動 */}
+      <div className="absolute top-[65%] left-1/2 transform -translate-x-1/2 z-10">
+        {!imageError['/img/bunny_intro_bunny.png'] ? (
+          <Image
+            src="/img/bunny_intro_bunny.png"
+            alt="Loading Bunny"
+            width={360}
+            height={360}
+            className="animate-bounce-slow hover:scale-105 transition-transform"
+            style={{ transform: 'scale(0.9)' }}
+            onError={() => handleImageError('/img/bunny_intro_bunny.png')}
+          />
+        ) : null}
+      </div>
     </div>
   );
 
@@ -305,7 +320,7 @@ export default function PsychologicalTest() {
             alt={`Result ${result} Bunny`}
             className="animate-bounce-slow"
             style={{ 
-              width: '195px',
+              width: '156px', // 195px * 0.8 = 156px
               height: 'auto'
             }}
             onError={(e) => {
