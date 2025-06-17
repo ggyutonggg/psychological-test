@@ -28,7 +28,7 @@ export default function PsychologicalTest() {
       image: '/img/bunny_ques_2.png',
       options: [
         '發藥、發塑膠袋、分口香糖，化身醫療官',
-        '吃早餐順便拍「暈浪特寫」自拍',
+        '打開手機先拍「暈浪特寫」自拍',
         '先暈三分鐘，再靜靜躺著，調整呼吸',
         '很興奮說說浪這麼大好刺激！'
       ]
@@ -37,9 +37,9 @@ export default function PsychologicalTest() {
       id: 3, 
       image: '/img/bunny_ques_3.png',
       options: [
-        '認真聽講，記住每個知識點',
+        '認真聽講，再提醒潛伴一次',
         '看一下，再轉頭跟潛伴自拍',
-        '看起來很認真，但其實腦袋空白',
+        '看起來放空，但其實都有認真聽講',
         '一直問導潛：「等等可以追魚群嗎？」'
       ]
     },
@@ -219,7 +219,7 @@ export default function PsychologicalTest() {
               }}
             >
               <div className="text-center">
-                <span className="text-sm text-white font-bold leading-relaxed">
+                <span className="text-xs text-white font-bold leading-relaxed">
                   {questions[currentQuestion - 1].options[index]}
                 </span>
               </div>
